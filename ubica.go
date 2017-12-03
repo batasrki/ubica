@@ -42,6 +42,7 @@ func main() {
 	// fmt.Println(all)
 	all := [16]int{66, 67, 73, 74, 79, 80, 81, 82, 84, 85, 89, 90, 107, 108, 109, 110}
 	stats := make([]int64, 0)
+	errors := make([]string, 0)
 
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
@@ -59,7 +60,9 @@ func main() {
 					// panic(err)
 					d := time.Now().Sub(s)
 					stats = append(stats, d.Nanoseconds())
+					errors = append(errors, err.Error())
 					fmt.Printf("%s\t%v\n", err, d)
+					return
 				}
 				d := time.Now().Sub(s)
 				stats = append(stats, d.Nanoseconds())
@@ -83,6 +86,9 @@ func main() {
 	fmt.Printf("Med:\t%v\n", time.Duration(stats[len(stats)/2]))
 	fmt.Printf("95th:\t%v\n", time.Duration(stats[len(stats)*95/100]))
 	fmt.Printf("99th:\t%v\n", time.Duration(stats[len(stats)*99/100]))
+	fmt.Printf("Total:\t%v\n", len(stats))
+	fmt.Printf("Errors:\t%v\n", len(errors))
+	fmt.Printf("Success:\t%v%%\n", len(errors)/len(stats)*100)
 	fmt.Println("-----------------------------------")
 }
 
