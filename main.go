@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/batasrki/ubica/glumac"
+	"github.com/batasrki/ubica/short_link"
 	"net/http"
 	"sort"
 	"strconv"
 	"sync"
 	"time"
-	"ubica/glumac"
-	"ubica/short_link"
 )
 
 func main() {
