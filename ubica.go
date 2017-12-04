@@ -1,31 +1,18 @@
 package main
 
 import (
-	"sort"
-	// "encoding/json"
 	"fmt"
-	// "github.com/go-redis/redis"
 	"net/http"
+	"sort"
 	"strconv"
-	// "net/url"
 	"sync"
 	"time"
+	"ubica/glumac"
+	"ubica/short_link"
 )
 
-type Record struct {
-	Url       string
-	Timestamp int
-	Client    string
-	Title     string
-}
-
 func main() {
-	// var record Record
-	// client := redis.NewClient(&redis.Options{
-	// 	Addr:     "localhost:6379",
-	// 	Password: "",
-	// 	DB:       0,
-	// })
+	glumac.helloActor()
 
 	var wg sync.WaitGroup
 	httpClient := &http.Client{
@@ -34,12 +21,6 @@ func main() {
 		},
 	}
 
-	// pong, err := client.Ping().Result()
-	// all, err := client.ZRange("posted:urls", 0, 1).Result()
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println(all)
 	all := [16]int{66, 67, 73, 74, 79, 80, 81, 82, 84, 85, 89, 90, 107, 108, 109, 110}
 	stats := make([]int64, 0)
 	errors := make([]string, 0)
@@ -51,9 +32,6 @@ func main() {
 			for _, rec := range all {
 				target := "http://138.197.170.57/"
 				target += strconv.Itoa(rec)
-				// json.Unmarshal([]byte(rec), &record)
-				// fmt.Println(record.Url)
-				// addShortLink(record.Url, client)
 				s := time.Now()
 				resp, err := httpClient.Get(target)
 				if err != nil {
@@ -97,15 +75,3 @@ type ByDuration []int64
 func (a ByDuration) Len() int           { return len(a) }
 func (a ByDuration) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByDuration) Less(i, j int) bool { return a[i] < a[j] }
-
-// func addShortLink(canonicalUrl string, client *redis.Client) {
-// 	vals := url.Values{}
-// 	vals.Set("url", canonicalUrl)
-// 	vals.Add("csrfmiddlewaretoken", "rD2g5SaXUQ5ZiYnjovgoB6im0PTzYUzSCBUuFhduQjDz4Bb6f2OTOzFWVl3bGjf0")
-// 	resp, err := http.PostForm("http://138.197.170.57/GenerateNewShortLink", vals)
-
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	fmt.Println(resp)
-// }
