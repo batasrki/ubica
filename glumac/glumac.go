@@ -4,7 +4,7 @@ import (
 	"github.com/teivah/gosiris/gosiris"
 )
 
-func helloActor() {
+func HelloActor() {
 	gosiris.InitActorSystem(gosiris.SystemOptions{
 		ActorSystemName: "HelloWorld",
 	})

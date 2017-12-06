@@ -2,6 +2,7 @@ package ubica
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/go-redis/redis"
 	"net/http"
 	"net/url"

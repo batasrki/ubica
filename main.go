@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/batasrki/ubica/glumac"
-	"github.com/batasrki/ubica/short_link"
+	// "github.com/batasrki/ubica/glumac"
+	// "github.com/batasrki/ubica/short_link"
 	"net/http"
 	"sort"
 	"strconv"
@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	glumac.helloActor()
+	// glumac.HelloActor()
 
 	var wg sync.WaitGroup
 	httpClient := &http.Client{
